@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
-    public float currentHealth = 50f;
+    public float currentHealth = 100f; // Start with full health
 
     public Slider healthSlider;
     public InventoryHandler inventory;
@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        currentHealth = maxHealth;
         if (healthSlider != null)
         {
             healthSlider.maxValue = maxHealth;
@@ -25,6 +26,13 @@ public class PlayerHealth : MonoBehaviour
         {
             UseMedkit();
         }
+    }
+
+    public void TakeDamage(float amount)
+    {
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        UpdateUI();
     }
 
     public void UseMedkit()
