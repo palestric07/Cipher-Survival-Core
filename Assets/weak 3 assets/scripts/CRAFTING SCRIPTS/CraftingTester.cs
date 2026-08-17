@@ -1,0 +1,43 @@
+using UnityEngine;
+
+public class CraftingTester : MonoBehaviour
+{
+    public CraftingHandler craftingHandler;
+
+    public CraftingRecipe empGrenadeRecipe;
+    public CraftingRecipe signalJammerRecipe;
+    public CraftingRecipe medkitRecipe;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            TryCraft(empGrenadeRecipe);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            TryCraft(signalJammerRecipe);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            TryCraft(medkitRecipe);
+        }
+    }
+
+    private void TryCraft(CraftingRecipe recipe)
+    {
+        if (craftingHandler == null || recipe == null) return;
+
+        if (craftingHandler.CanCraft(recipe))
+        {
+            craftingHandler.CraftItem(recipe);
+            Debug.Log("Successfully crafted: " + recipe.recipeName);
+        }
+        else
+        {
+            Debug.LogWarning("Cannot craft " + recipe.recipeName + "! Missing required ingredients.");
+        }
+    }
+}
