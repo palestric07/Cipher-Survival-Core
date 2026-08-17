@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177a0dbe2a1b66142b1a33fd9f037263, type: 3}
   m_Name: Medkit_Data
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  itemType: 0
-  icon: {fileID: 0}
+  itemName: Medkit
+  itemType: 5
+  icon: {fileID: 21300000, guid: 0c6b29acbadeb43bd82ab98e962a7faa, type: 3}
   maxStackSize: 99
   description: 

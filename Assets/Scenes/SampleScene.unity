@@ -1537,10 +1537,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 50, y: 50}
+  m_CellSize: {x: 65, y: 65}
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 1
-  m_ConstraintCount: 4
+  m_ConstraintCount: 3
 --- !u!114 &785956355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3115,7 +3115,7 @@ RectTransform:
   m_GameObject: {fileID: 1641210020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.39}
-  m_LocalScale: {x: 0.002, y: 0.002, z: 0.002}
+  m_LocalScale: {x: 0.0029858658, y: 0.0029858658, z: 0.0029858658}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 785956353}
@@ -3424,6 +3424,8 @@ GameObject:
   - component: {fileID: 1939673445}
   - component: {fileID: 1939673447}
   - component: {fileID: 1939673448}
+  - component: {fileID: 1939673450}
+  - component: {fileID: 1939673449}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3781,7 +3783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aafc34a8000efed498f918f6fb16dcc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryHandler
-  maxSlots: 12
+  maxSlots: 9
   slots: []
 --- !u!114 &1939673448
 MonoBehaviour:
@@ -3797,6 +3799,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BackpackToggle
   backpackCanvas: {fileID: 1641210020}
   toggleKey: 98
+--- !u!114 &1939673449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939673434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59015378e3835094aa9ed9def9f540ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CraftingTester
+  craftingHandler: {fileID: 1939673450}
+  empGrenadeRecipe: {fileID: 11400000, guid: 5f137d25e28ded148bf01ff53ccd8805, type: 2}
+  signalJammerRecipe: {fileID: 11400000, guid: 1537c31d4998d18419f1f4145cd02b72, type: 2}
+  medkitRecipe: {fileID: 11400000, guid: 2e6617fa76a64684290981a2dfb72f36, type: 2}
+--- !u!114 &1939673450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939673434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c39341ab69f4943a367371aa068e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CraftingHandler
+  inventory: {fileID: 1939673447}
 --- !u!1 &1955276447
 GameObject:
   m_ObjectHideFlags: 0

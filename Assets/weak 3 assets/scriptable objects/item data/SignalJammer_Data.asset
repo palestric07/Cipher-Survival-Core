@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177a0dbe2a1b66142b1a33fd9f037263, type: 3}
   m_Name: SignalJammer_Data
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  itemType: 0
-  icon: {fileID: 0}
+  itemName: Signal Jammer
+  itemType: 4
+  icon: {fileID: 21300000, guid: a0f7a801bfc4c41c0b727773edac1e82, type: 3}
   maxStackSize: 99
   description: 

@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 749906f992656dd4b8472d5b5127dd16, type: 3}
   m_Name: Recipe_SignalJammer
   m_EditorClassIdentifier: Assembly-CSharp::CraftingRecipe
-  recipeName: 
-  resultItem: {fileID: 0}
+  recipeName: Signal Jammer
+  resultItem: {fileID: 11400000, guid: 83b1ba2dac244344f9f7176ce5ffc6e0, type: 2}
   resultAmount: 1
-  ingredients: []
+  ingredients:
+  - item: {fileID: 11400000, guid: 11acb00248503054999b035cdf31a00a, type: 2}
+    amount: 1
+  - item: {fileID: 11400000, guid: 44374e6e04bc14c4ab0de1ec683eab64, type: 2}
+    amount: 1
