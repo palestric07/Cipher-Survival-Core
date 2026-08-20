@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Toggles the visibility of the backpack UI canvas.
+/// </summary>
 public class BackpackToggle : MonoBehaviour
 {
     public GameObject backpackCanvas;
@@ -21,6 +24,9 @@ public class BackpackToggle : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Toggles the active state of the backpack UI canvas.
+    /// </summary>
     public void ToggleBackpack()
     {
         if (backpackCanvas != null)

@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Deals continuous damage over time to any player object inside its trigger zone.
+/// </summary>
 public class DamageDealer : MonoBehaviour
 {
     public float damagePerSecond = 10f;

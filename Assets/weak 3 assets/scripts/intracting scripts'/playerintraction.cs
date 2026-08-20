@@ -1,33 +1,33 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles player interaction logic by detecting and triggering nearby interactable objects.
+/// </summary>
 public class PlayerInteraction : MonoBehaviour
 {
-    [Header("Interaction Settings")]
     public float interactRange = 3.5f;
-    public LayerMask interactableLayer = ~0; // ~0 means Everything layer
+    public LayerMask interactableLayer = ~0;
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E key pressed!");
             TryInteract();
         }
     }
 
+    /// <summary>
+    /// Searches for nearby objects implementing IInteractable within range and triggers their interaction.
+    /// </summary>
     private void TryInteract()
     {
-        // Player ke paas 3.5 meter range mein saare colliders find karta hai
         Collider[] colliders = Physics.OverlapSphere(transform.position, interactRange, interactableLayer);
-        
         bool foundInteractable = false;
 
         foreach (var col in colliders)
         {
-            // Direct component check
             IInteractable interactable = col.GetComponent<IInteractable>();
 
-            // Agar main object par na mile to parent par check
             if (interactable == null)
             {
                 interactable = col.GetComponentInParent<IInteractable>();
@@ -38,19 +38,18 @@ public class PlayerInteraction : MonoBehaviour
                 foundInteractable = true;
                 Debug.Log("Interacting with: " + col.gameObject.name);
                 interactable.Interact();
-                break; // Ek waqt mein ek object se interact karega
+                break;
             }
         }
 
         if (!foundInteractable)
         {
-            Debug.LogWarning("No IInteractable object found nearby within range of " + interactRange + "m!");
+            Debug.LogWarning("No interactable object found nearby!");
         }
     }
 
     private void OnDrawGizmosSelected()
     {
-        // Scene view mein red wireframe sphere dikhayega interaction range ka
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }

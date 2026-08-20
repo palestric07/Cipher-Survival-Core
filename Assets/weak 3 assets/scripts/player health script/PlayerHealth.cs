@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages player health, taking damage, healing via medkits, and updating the health UI slider.
+/// </summary>
 public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
-    public float currentHealth = 100f; // Start with full health
+    public float currentHealth = 100f;
 
     public Slider healthSlider;
     public InventoryHandler inventory;
@@ -28,6 +31,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reduces player health by the specified amount and updates the health UI.
+    /// </summary>
+    /// <param name="amount">The amount of damage to inflict.</param>
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
@@ -35,6 +42,9 @@ public class PlayerHealth : MonoBehaviour
         UpdateUI();
     }
 
+    /// <summary>
+    /// Consumes a medkit item from the player inventory to restore health if needed.
+    /// </summary>
     public void UseMedkit()
     {
         if (inventory == null || medkitData == null) return;
@@ -49,6 +59,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Restores player health by the specified amount and updates the health UI.
+    /// </summary>
+    /// <param name="amount">The amount of health to restore.</param>
     public void Heal(float amount)
     {
         currentHealth += amount;

@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IPoolable
+{
+    void OnObjectSpawn();
+}
+
 public class ObjectPoolManager : MonoBehaviour
 {
     public static ObjectPoolManager Instance { get; private set; }
@@ -14,7 +19,9 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     public List<Pool> pools;
+
     private Dictionary<string, Queue<GameObject>> poolDictionary;
+    private Dictionary<string, GameObject> prefabDictionary;
 
     private void Awake()
     {
@@ -34,16 +41,18 @@ public class ObjectPoolManager : MonoBehaviour
     private void InitializePools()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        prefabDictionary = new Dictionary<string, GameObject>();
 
         foreach (Pool pool in pools)
         {
+            if (prefabDictionary.ContainsKey(pool.poolKey)) continue;
+
             Queue<GameObject> objectPool = new Queue<GameObject>();
+            prefabDictionary.Add(pool.poolKey, pool.prefab);
 
             for (int i = 0; i < pool.initialSize; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
-                obj.transform.SetParent(transform);
+                GameObject obj = CreateNewObject(pool.prefab);
                 objectPool.Enqueue(obj);
             }
 
@@ -55,7 +64,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         if (!poolDictionary.ContainsKey(poolKey))
         {
-            Debug.LogWarning("Pool key not found: " + poolKey);
+            Debug.LogWarning($"Pool key not found: {poolKey}");
             return null;
         }
 
@@ -67,20 +76,24 @@ public class ObjectPoolManager : MonoBehaviour
         }
         else
         {
-            // Expansion fallback if pool runs empty
-            Pool pool = pools.Find(p => p.poolKey == poolKey);
-            objToSpawn = Instantiate(pool.prefab);
+            objToSpawn = CreateNewObject(prefabDictionary[poolKey]);
         }
 
-        objToSpawn.transform.position = position;
-        objToSpawn.transform.rotation = rotation;
+        objToSpawn.transform.SetPositionAndRotation(position, rotation);
         objToSpawn.SetActive(true);
+
+        if (objToSpawn.TryGetComponent(out IPoolable poolable))
+        {
+            poolable.OnObjectSpawn();
+        }
 
         return objToSpawn;
     }
 
     public void ReturnToPool(string poolKey, GameObject obj)
     {
+        if (obj == null || !obj.activeSelf) return;
+
         obj.SetActive(false);
         obj.transform.SetParent(transform);
 
@@ -88,5 +101,12 @@ public class ObjectPoolManager : MonoBehaviour
         {
             poolDictionary[poolKey].Enqueue(obj);
         }
+    }
+
+    private GameObject CreateNewObject(GameObject prefab)
+    {
+        GameObject obj = Instantiate(prefab, transform);
+        obj.SetActive(false);
+        return obj;
     }
 }

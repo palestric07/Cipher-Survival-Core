@@ -1,21 +1,30 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles teleporting the player to a target destination door upon interaction.
+/// </summary>
 public class TeleportDoor : MonoBehaviour, IInteractable
 {
-    [Header("Teleport Settings")]
     public Transform destinationDoor;
     public Vector3 spawnOffset = new Vector3(0, 0, 1.5f);
 
+    /// <summary>
+    /// Returns the prompt string displayed to the player for entering the door.
+    /// </summary>
+    /// <returns>Interaction prompt message.</returns>
     public string GetInteractPrompt()
     {
         return "Press E to Enter Door";
     }
 
+    /// <summary>
+    /// Teleports the player to the assigned destination door position with an offset.
+    /// </summary>
     public void Interact()
     {
         if (destinationDoor == null)
         {
-            Debug.LogWarning("Destination Door assign nahi hai Inspector mein!");
+            Debug.LogWarning("Destination Door is not assigned in the Inspector!");
             return;
         }
 

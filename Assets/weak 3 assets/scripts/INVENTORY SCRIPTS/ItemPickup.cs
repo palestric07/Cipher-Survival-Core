@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles collecting items in the world when the player enters its trigger zone.
+/// </summary>
 public class ItemPickup : MonoBehaviour
 {
     public ItemData itemData;

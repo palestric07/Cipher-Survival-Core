@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Helper component for testing crafting recipes using keyboard shortcuts.
+/// </summary>
 public class CraftingTester : MonoBehaviour
 {
     public CraftingHandler craftingHandler;
@@ -26,6 +29,10 @@ public class CraftingTester : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Attempts to craft the specified recipe through the CraftingHandler.
+    /// </summary>
+    /// <param name="recipe">The crafting recipe to evaluate and process.</param>
     private void TryCraft(CraftingRecipe recipe)
     {
         if (craftingHandler == null || recipe == null) return;

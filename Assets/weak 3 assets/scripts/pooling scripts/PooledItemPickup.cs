@@ -1,10 +1,13 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles item pickup logic for pooled game objects and returns them to ObjectPoolManager upon collection.
+/// </summary>
 public class PooledItemPickup : MonoBehaviour
 {
     public ItemData itemData;
     public int amount = 1;
-    public string poolKey; // "FuelCanister" ya "FoodPack"
+    public string poolKey;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,8 +17,7 @@ public class PooledItemPickup : MonoBehaviour
             if (inventory != null && itemData != null)
             {
                 inventory.AddItem(itemData, amount);
-                
-                // Destroy ki jagah object pool mein return
+
                 if (ObjectPoolManager.Instance != null && !string.IsNullOrEmpty(poolKey))
                 {
                     ObjectPoolManager.Instance.ReturnToPool(poolKey, gameObject);

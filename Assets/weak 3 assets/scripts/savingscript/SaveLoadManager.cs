@@ -1,6 +1,9 @@
 using System.IO;
 using UnityEngine;
 
+/// <summary>
+/// Manages saving and loading player position, health, and inventory data to a JSON file.
+/// </summary>
 public class SaveLoadManager : MonoBehaviour
 {
     public Transform playerTransform;
@@ -28,6 +31,9 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Saves current player stats, position, and inventory contents to a JSON save file.
+    /// </summary>
     public void SaveGame()
     {
         SaveData data = new SaveData();
@@ -65,6 +71,9 @@ public class SaveLoadManager : MonoBehaviour
         Debug.Log("Game Saved to: " + saveFilePath);
     }
 
+    /// <summary>
+    /// Loads saved player stats, position, and inventory items from the JSON save file.
+    /// </summary>
     public void LoadGame()
     {
         if (!File.Exists(saveFilePath))
@@ -94,7 +103,6 @@ public class SaveLoadManager : MonoBehaviour
 
         if (inventoryHandler != null)
         {
-            // Clear current inventory safely using reverse loop
             for (int i = inventoryHandler.slots.Count - 1; i >= 0; i--)
             {
                 var slot = inventoryHandler.slots[i];
@@ -104,7 +112,6 @@ public class SaveLoadManager : MonoBehaviour
                 }
             }
 
-            // Load saved items
             foreach (var savedItem in data.inventoryItems)
             {
                 ItemData itemAsset = FindItemDataByName(savedItem.itemName);
