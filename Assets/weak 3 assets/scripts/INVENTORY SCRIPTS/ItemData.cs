@@ -7,7 +7,9 @@ public enum ItemType
     EMPCore,
     EMPGrenade,
     SignalJammer,
-    Medkit
+    Medkit,
+    FuelCanister, 
+    FoodPack 
 }
 
 [CreateAssetMenu(fileName = "NewItemData", menuName = "Survival System/Item Data")]
